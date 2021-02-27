@@ -31,7 +31,6 @@
         <div v-else>
           <span>暂无搜索结果，换个搜索词试试呢~</span>
         </div>
-        <div>{{curPeopleList}}</div>
         <div style="text-align: right; margin: 0">
           <el-button type="primary" size="mini" @click="confirm">确定</el-button>
         </div>
@@ -53,6 +52,14 @@ export default {
   },
   components: {
     SelectedButton
+  },
+  watch: {
+    visible (val) {
+      if (val) {
+        this.searchContent = '' // 打开弹窗，清空搜索词
+        this.searchList() // 重新搜索列表
+      }
+    }
   },
   data () {
     return {
@@ -167,7 +174,7 @@ export default {
 .right{
     margin-left: 20px;
   }
-  .search{
-    margin-bottom: 20px;
-  }
+.search{
+  margin-bottom: 20px;
+}
 </style>
