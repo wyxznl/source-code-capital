@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">选人</router-link>
+      <router-link to="/form">包括选人组件的表单</router-link>
     </div>
     <router-view/>
   </div>
