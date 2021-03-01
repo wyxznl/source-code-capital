@@ -75,57 +75,33 @@ export default {
   },
   methods: {
     getAllPeopleList () {
-      // this.$http.get('/api/allpeople')
-      // .then((res) => {
-      //   const {
-      //     code,
-      //     data
-      //   } = res
-      //   if (code === 0) {
-      //     this.allPeopleList = data.list
-      //     this.allPeopleList = data.list
-      //     // 获取当前已选中id对应的列表
-      //     this.allPeopleList.map(i => {
-      //       if (this.value.indexOf(i.id) > -1) {
-      //         this.selectedPeopleList.push(i)
-      //       }
-      //     })
-      //   }
-      // })
-      // .catch((err) => {
-      //   console.log(err)
-      // })
-      this.allPeopleList = [
-        {
-          name: '张三',
-          id: 1
-        },
-        {
-          name: '李四',
-          id: 2
-        },
-        {
-          name: '王五',
-          id: 3
-        },
-        {
-          name: '许嵩',
-          id: 4
-        }
-      ]
-      this.allPeopleList = this.curPeopleList = this.allPeopleList.map(i => {
-        return {
-          ...i,
-          selected: false
-        }
-      })
-      this.allPeopleList.map(i => {
-        if (this.value.indexOf(i.id) > -1) {
-          this.selectedPeopleList.push(i)
-          i.selected = true
-        }
-      })
-      console.log(this.selectedPeopleList, this.allPeopleList)
+      this.$http.get('/api/allpeople')
+        .then((res) => {
+          const {
+            code,
+            data
+          } = res
+          if (code === 0) {
+          // 获取所有待选人员列表 和 搜索前展示的人员列表
+            this.allPeopleList = this.curPeopleList = data.list.map(i => {
+              return {
+                ...i,
+                selected: false
+              }
+            })
+            // 筛选父组件传入的已选人员列表
+            this.allPeopleList.map(i => {
+              if (this.value.indexOf(i.id) > -1) {
+                this.selectedPeopleList.push(i)
+                i.selected = true
+              }
+            })
+            console.log(this.selectedPeopleList, this.allPeopleList)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     // 删除标签
     delTag (index) {
@@ -148,6 +124,7 @@ export default {
       const selectedPeopleId = list.map(i => i.id)
       this.$emit('input', selectedPeopleId)
     },
+    // 搜索后要展示的列表
     searchList (val) {
       if (val) {
         this.curPeopleList = this.allPeopleList.filter(i => {
