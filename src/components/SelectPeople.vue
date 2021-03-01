@@ -105,12 +105,8 @@ export default {
     },
     // 删除标签
     delTag (index) {
-      // const curDelete = this.allPeopleList.find(i => i.id === this.selectedPeopleList[index].id)
       const curDeleteItem = this.selectedPeopleList.splice(index, 1)[0]
       this.$set(curDeleteItem, 'selected', false)
-      // console.log(curDelete, curDelete2, '6666')
-      console.log(index, this.allPeopleList, this.selectedPeopleList)
-
       this.sendSelectedId(this.selectedPeopleList) // 向父组件发送当前的已选id列表
     },
     // 确认当前选择的标签
@@ -128,14 +124,11 @@ export default {
     searchList (val) {
       if (val) {
         this.curPeopleList = this.allPeopleList.filter(i => {
-          console.log(i.name.includes(val), 'jkkkk')
           return i.name.includes(val)
         })
-        console.log(this.curPeopleList, '112233')
         return
       }
       this.curPeopleList = this.allPeopleList
-      console.log(this.curPeopleList, 'kklll')
     }
   }
 }

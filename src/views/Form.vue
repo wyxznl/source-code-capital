@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       form: {
-        selectedPeople: [1, 2, 3] // 初始选中人员id数组
+        selectedPeople: [2, 3, 5, 6] // 初始选中人员id数组
       }
     }
   },
